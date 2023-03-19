@@ -6,12 +6,14 @@ In the exploitation of an SSTI vulnerability, our goal is to recover access to t
 
 Objects that are always accessible from the sandboxed env:
 
+```
 []
 ''
 ()
 dict
 config
 request
+```
 
 # example payload
 {{ [].__class__.__base__ }} # <class 'object'>
