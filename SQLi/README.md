@@ -1,17 +1,17 @@
-# SQL Injection
-
-Initial checks
+# Initial checks
 
 Oracle / MSSQL / PostgreSQL / MySQL / SQLite
+```
  -- 
 ' -- 
 " -- 
  /*
 ' /* 
 " /* 
-
+```
 MySQL
+```
  # 
 ' # 
 " # 
-
+```
