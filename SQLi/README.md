@@ -1,5 +1,5 @@
-# Initial checks
-This is the point where the entry point is found. if output by the application is unchanged after one of these payloads - it might be vulnerable to SQLi.
+# Entry Point
+if output by the application is unchanged after one of these payloads - it might be vulnerable to SQLi.
 
 Oracle / MSSQL / PostgreSQL / MySQL / SQLite
 ```
