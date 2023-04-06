@@ -16,8 +16,6 @@ MySQL
 ' # 
 " # 
 ```
-<span style="color:#00ff00">This text is green</span>
-<code style="color:green">SELECT role,fullname FROM users WHERE id='</code>
 example query: SELECT role,fullname FROM users WHERE id='1' # '
 # UNION attack
 if data is returned in the response, the database can be enumerated using a union attack.
@@ -34,7 +32,9 @@ other builtin methods and attributes to further enumerate the database.
 
 example query:
 ```diff
-@@ SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id=" @@ - -1" UNION SELECT 1,2,3 /* @@ " @@
+@@ SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id=" @@
+- -1" UNION SELECT 1,2,3 /* 
+@@ " @@
 ```
 # Version enumeration
 
