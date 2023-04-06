@@ -16,6 +16,7 @@ MySQL
 ' # 
 " # 
 ```
+https://placehold.it/150/ffffff/ff0000?text=SELECT%20role%2Cfullname%20FROM%20users%20WHERE%20id%3D%27
 <code style="color:green">SELECT role,fullname FROM users WHERE id='</code>
 example query: SELECT role,fullname FROM users WHERE id='1' # '
 # UNION attack
