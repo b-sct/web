@@ -16,7 +16,7 @@ MySQL
 ' # 
 " # 
 ```
-<span style="color:orange;">Word up</span>
+<span style="color:#00ff00">This text is green</span>
 <code style="color:green">SELECT role,fullname FROM users WHERE id='</code>
 example query: SELECT role,fullname FROM users WHERE id='1' # '
 # UNION attack
