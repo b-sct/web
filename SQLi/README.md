@@ -1,5 +1,5 @@
 # Entry Point
-if output by the application is unchanged after one of these payloads - it might be vulnerable to SQLi.
+if the response is unchanged after one of these payloads - the parameter might be vulnerable to SQLi.
 
 Oracle / MSSQL / PostgreSQL / MySQL / SQLite
 ```
@@ -16,6 +16,7 @@ MySQL
 ' # 
 " # 
 ```
+example query: SELECT id,username,role FROM users WHERE id='1' # '
 # UNION attack
 if data is returned in the response, the database can be enumerated using a union attack.
 in this case, the first step is to figure out how many columns are returned by the query.
