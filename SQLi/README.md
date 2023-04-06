@@ -32,9 +32,9 @@ other builtin methods and attributes to further enumerate the database.
 
 example query:
 ```diff
-+SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
--1" UNION SELECT 1,2,3 /*
-+"
++ SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
+- 1" UNION SELECT 1,2,3 /*
++ "
 ```
 # Version enumeration
 
