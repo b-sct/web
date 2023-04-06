@@ -34,7 +34,6 @@ example query:
 ```diff
 @@ SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id=" @@ - -1" UNION SELECT 1,2,3 /* @@ " @@
 ```
- "
 # Version enumeration
 
 PostgreSQL / MySQL / MariaDB
