@@ -31,7 +31,8 @@ after some of the numbers we supplied are reflected in the response, we can repl
 other builtin methods and attributes to further enumerate the database.
 
 example query:
-This text is {color:red}red{color}.
+This text is <style>color:red</style>red.
+
 
 ```diff
 + SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
