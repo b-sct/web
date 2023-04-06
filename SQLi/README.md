@@ -16,6 +16,7 @@ MySQL
 ' # 
 " # 
 ```
+<code style="color : name_color">text</code>
 example query: SELECT role,fullname FROM users WHERE id='1' # '
 # UNION attack
 if data is returned in the response, the database can be enumerated using a union attack.
