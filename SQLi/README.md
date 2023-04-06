@@ -1,4 +1,4 @@
-# Entry Point
+# Entry point
 if the response is unchanged after one of these payloads - the parameter might be vulnerable to SQLi.
 
 Oracle / MSSQL / PostgreSQL / MySQL / SQLite
@@ -29,6 +29,7 @@ and then unioning a row of my choice until it is returned by the application:
 ```
 after some of the numbers we supplied are reflected in the response, we can replace them with
 other builtin methods and attributes to further enumerate the database.
+
 example query: SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="-1" UNION SELECT 1,2,3 /* "
 # Version enumeration
 
