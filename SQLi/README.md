@@ -31,10 +31,9 @@ after some of the numbers we supplied are reflected in the response, we can repl
 other builtin methods and attributes to further enumerate the database.
 
 ```diff
-@@ example query @@
-+ SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
+SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
 - 1" UNION SELECT 1,2,3 /*
-+ "
+"
 ```
 # Version enumeration
 
