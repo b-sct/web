@@ -74,3 +74,8 @@ PostgreSQL
 SELECT datname FROM pg_database;
 SELECT table_name, column_name FROM information_schema.columns WHERE column_name LIKE '%ass%';
 ```
+
+# Tricks
+MSSQL can run system stored procedures such as xp_cmdshell which can be abused to move laterally.
+xp_cmdshell -> direct RCE
+xp_dirtree -> lists the contents of a folder. can be run against an attacker responder to get service user NTLM.
