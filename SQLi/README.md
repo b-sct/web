@@ -54,5 +54,3 @@ Oracle
 SELECT banner FROM v$version
 SELECT version FROM v$instance
 ```
-
-Once I have a non-blind union injection, I like to union database version number to help with syntax for future payloads.
