@@ -1,5 +1,5 @@
 # Entry point
-if the response is unchanged after one of these payloads - the parameter might be vulnerable to SQLi.
+if the response is unchanged after one of these payloads (or an error is returned) - the parameter might be vulnerable to SQLi.
 
 Oracle / MSSQL / PostgreSQL / MySQL / SQLite
 ```
