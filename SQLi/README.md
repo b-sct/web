@@ -54,3 +54,23 @@ Oracle
 SELECT banner FROM v$version
 SELECT version FROM v$instance
 ```
+
+# Data exfiltration
+some of the queries I like to run in order to enumerate the databse further are:
+
+Oracle
+```
+SELECT DISTINCT owner FROM all_tables; -- list databases
+SELECT table_name, column_name FROM all_tab_cols WHERE column_name LIKE '%ser%'; /* lists columns like User, username and user */
+SELECT table_name, column_name FROM all_tab_cols WHERE column_name LIKE '%ass%'; -- same but for pass or Password
+```
+MSSQL
+```
+SELECT name FROM master.sys.databases;
+SELECT t.name AS table_name, c.name AS column_name FROM sys.tables t JOIN sys.columns c ON t.object_id = c.object_id WHERE c.name LIKE '%ass%'; 
+```
+PostgreSQL
+```
+SELECT datname FROM pg_database;
+SELECT table_name, column_name FROM information_schema.columns WHERE column_name LIKE '%ass%';
+```
