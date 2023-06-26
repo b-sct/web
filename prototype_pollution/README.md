@@ -2,7 +2,7 @@
 is a vulnerability in javascript runtimes that is introduced when calling unsafe recursive functions, that merge object attributes with user controlled input - allowing an attacker to pollute the **__proto__**, which is the highest object in the prototype chain, from which all other objects inherit.
 **prototype** is the object used to build __proto__, and can be accessed through constructor funcs
 
-pollution.htb contains the following in one of the endpoints of an express API
+one of pollution.htb express API endpoints contains the following functionality:
 ```
 if(req.body.text){
         const message = {
@@ -12,7 +12,7 @@ if(req.body.text){
         _.merge(message, req.body);
         ... 
 ```
-# lodash/merge.js
+### lodash/merge.js
 ```
   baseFor(source, function(srcValue, key) {
     if (isObject(srcValue)) {
