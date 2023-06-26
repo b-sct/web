@@ -1,3 +1,5 @@
 # web
 
-my journey through web sec
+nginx config
+/etc/nginx/nginx.conf
+/etc/nginx/sites-available/vhost.example.com
