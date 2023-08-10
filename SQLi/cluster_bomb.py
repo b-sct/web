@@ -54,7 +54,9 @@ def send_req(attempt):
     """ tuple representing the current cluster_bomb payload.
     all tests for responses should be implemented inside the decide function."""
 
-    tmp = request_template.replace('CLUSTER1', attempt[0]).replace('CLUSTER2', attempt[1])
+    tmp = request_template
+    tmp.replace('CLUSTER0', attempt[0])
+    tmp.replace('CLUSTER1', attempt[1])
 
     if decide(tmp):
       password[(attempt[0] - 1)] = attempt[1]
@@ -65,7 +67,7 @@ chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Cluster Bomb')
-    parser.add_argument('request_file', type=str, help='Path to text file containing the request template. replace parameter 1 and 2 with CLUSTER1 and CLUSTER2 respectively.')
+    parser.add_argument('request_file', type=str, help='Path to text file containing the request template. replace parameter 0 and 1 with CLUSTER0 and CLUSTER1 respectively.')
     args = parser.parse_args()
 
     global request_template
