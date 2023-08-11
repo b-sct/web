@@ -57,20 +57,19 @@ def send_req(attempt):
     """ tuple representing the current cluster_bomb payload.
     all tests for responses should be implemented inside the decide function."""
 
-    tmp = request_template.replace('CLUSTER0', str(attempt[0])).replace('CLUSTER1', str(attempt[1]))
+    req = request_template.replace('CLUSTER0', str(attempt[0])).replace('CLUSTER1', str(attempt[1]))
 
-    if decide(tmp):
+    if decide(req):
         with password_lock:
             password[(attempt[0] - 1)] = attempt[1]
-        print(f"[+] {attempt[0]}, {attempt[1]}: SUCCESS")
+        print(f"[+] {attempt}")
 
 
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Cluster Bomb')
-    parser.add_argument('request_file', type=str,
-                        help='Path to text file containing the request template. replace parameter 0 and 1 with CLUSTER0 and CLUSTER1 respectively.')
+    parser = argparse.ArgumentParser(description='Cluster Bomb - command line alternative to intruder')
+    parser.add_argument('request_file', type=str, help='Path to request file. replace parameter 0 and 1 with CLUSTER0 and CLUSTER1 respectively.')
     args = parser.parse_args()
 
     global request_template
@@ -79,12 +78,9 @@ if __name__ == "__main__":
 
     global password
     password = {}
-    global lst
-    lst = range(21)
 
     password_lock = threading.Lock()
 
-    payload = []
     for i in range(1, 21):
         payload = [(i, char) for char in chars]
         with concurrent.futures.ThreadPoolExecutor(50) as executor:
