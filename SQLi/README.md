@@ -83,7 +83,7 @@ select case when substring(password,§1§,1)='§char§' then pg_sleep(5) else pg
 ```
 
 # Data exfiltration
-some of the queries I like to run in order to enumerate the databse further are:
+some of the queries I like to run in order to enumerate the database contents further
 
 Oracle
 ```
