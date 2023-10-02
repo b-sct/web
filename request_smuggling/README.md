@@ -10,17 +10,16 @@ of the request to be interpreted as the start of the next request.
 
 the vuln could be classified as either of the following:
 
-    * ```CL.TE``` the front-end server uses the Content-Length header and the back-end server uses the Transfer-Encoding header.
-    * ```TE.CL``` the front-end server uses the Transfer-Encoding header and the back-end server uses the Content-Length header.
-    * ```TE.TE``` the front-end and back-end servers both support the Transfer-Encoding header, but one of the servers can be induced not to process it by obfuscating the header in some way.
+- ```CL.TE``` the front-end server uses the Content-Length header and the back-end server uses the Transfer-Encoding header.
+- ```TE.CL``` the front-end server uses the Transfer-Encoding header and the back-end server uses the Content-Length header.
+- ```TE.TE``` the front-end and back-end servers both support the Transfer-Encoding header, but one of the servers can be induced not to process it by obfuscating the header in some way.
 
 #### ```CL.TE``` example
 ```
 POST / HTTP/1.1
 Host: vulnerable.com
-Connection: keep-alive
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 6
+Content-Length: 60
 Transfer-Encoding: chunked
 
 0
@@ -28,6 +27,9 @@ Transfer-Encoding: chunked
 GET /reset?pass=smuggled HTTP/1.1
 Host: vulnerable.com
 ```
+in this example, the front-end prefers Content-Length, so 60 bytes are specified (up until the end of the Host header of the smuggled request), while the backend processes using Transfer-Encoding - 
+the first chunk is processed (0) which terminates the request. All lines that follow are considered the start of a new request, so the next request's contents will be appended to the smuggled one.
+
 
 #### ```TE.CL``` example
 ```
