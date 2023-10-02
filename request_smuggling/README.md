@@ -1,9 +1,11 @@
 ## Request smuggling
 is a vulnerability introduced when reverse-proxies and backend servers are not syncronized in their preference for either the ```Content-Length```
-or ```Transfer-Encoding``` header for defining the boundaries of incoming client requests - allowing an attacker to send a request that would overlap
-with other requests that are forwarded to the backend (for example: injecting a POST request that has a body parameter ```smuggling=``` and ```Content-Length: 30``` - 
-resulting in the request line of the next request in the stack to be parsed as the content of the variable smuggling).  
-which results in part of the request to be interpreted as the start of the next request.
+or ```Transfer-Encoding``` header for defining the boundaries of incoming client requests.
+
+This desync allows an attacker to send a request that would overlap with other requests on the stack that are forwarded to the backend 
+For example: injecting a POST request that has a body parameter ```smuggling=``` and ```Content-Length: 30``` - 
+resulting in the request line of the next request in the stack to be parsed as the content of the variable smuggling, reulting in part
+of the request to be interpreted as the start of the next request.
 
 
 the vuln could be classified as either of the following:
