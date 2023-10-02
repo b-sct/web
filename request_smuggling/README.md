@@ -49,5 +49,5 @@ x=1
 0
 
 ```
-in this example, the ```Content-Length``` of the injected POST request surpasses the length of ```x=1\r\n0\r\n\r\n```, resulting in the parsing of the next incoming request's line as
-the body of a POST request.
+in this example, the ```Content-Length``` of the injected GET request surpasses the length of ```x=1\r\n0\r\n\r\n```, resulting in the parsing of the next incoming request's line as
+the body of the smuggled GET request.
